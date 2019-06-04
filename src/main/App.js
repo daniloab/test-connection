@@ -171,11 +171,9 @@ function timeoutPromise(ms, promise) {
 const App = () => {
     const [results, setResults] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
-    const [isTesting, setIsTesting] = useState(false)
 
     const startTest = async (loop) => {
         setIsFetching(true);
-        setIsTesting(true);
 
         var reqs = [];
         for (let i = 1; i <= loop; i++) {
@@ -194,8 +192,8 @@ const App = () => {
             }
         }
 
-        setResults(reqs);
-        setIsTesting(false);
+        setResults(reqs);        
+        setIsFetching(false);
     }
 
     return (
@@ -216,10 +214,9 @@ const App = () => {
                     }
 
                     {
-                        results.length > 0 && !isTesting &&
+                        results.length > 0 && !isFetching &&
                         <>
-                            <h1>Resultado</h1>
-                            <TableResults result={results} fetching={isFetching} isLoading={() => setIsFetching(!isFetching)} />
+                            <TableResults result={results} />
                         </>
                     }
                 </Wrapper>
